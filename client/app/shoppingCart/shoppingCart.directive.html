@@ -1,0 +1,10 @@
+<div stick-to-top>
+	<h1>Cart</h1>
+	<div ng-repeat="product in shoppingCartProducts">
+	  <div><strong>Name:</strong> {{product.name}}<button type="button" class="close" ng-click="removeFromShoppingCart(product)">&times;</button></div>
+	  <div><strong>Quantity:</strong> {{getShoppingCartCount(product)}}</div>
+	  <div><strong>Price:</strong> ${{product.price}}</div>
+	</div>
+	<h2 ng-show="shoppingCartProducts.length !== 0">${{totalPrice}}</h2>
+	<a class="btn btn-success" ng-click="setProduct(product)" href="/checkOut" ng-show="shoppingCartProducts.length !== 0">Check out</a>
+</div>

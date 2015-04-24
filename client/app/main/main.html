@@ -1,29 +1,32 @@
-<div ng-include="'components/navbar/navbar.html'"></div>
-
-<header class="hero-unit" id="banner">
-  <div class="container">
-  </div>
-</header>
+<website-header></website-header>
 
 <div class="container">
   <div class="row">
-    <div class="col-lg-12">
-      <h1>Products:</h1>
-      <div class="col-md-4 col-lg-4 col-sm-6" ng-repeat="product in products">
-        <div>Name: {{product.name}}<button type="button" class="close" ng-click="deleteProduct(product)">&times;</button></div>
-        <div>Info: {{product.info}}</div>
-        <div>Price: ${{product.price}}</div>
-        <div ng-repeat="comment in product.comments">
-          {{comment.info}}
-          <br>
-          -{{comment.name}}
+    <div class="col-md-10">
+      <h1>Products</h1>
+      <div masonry>
+        <div class="masonry-brick" ng-repeat="product in products">
+          <div class="pull-right">
+            <div class="">Cart</div>
+            <div class="btn-group">
+              <button class="btn btn-default" ng-click="removeItemFromShoppingCart(product)">-</button><button class="btn btn-default">{{getShoppingCartCount(product)}}</button><button class="btn btn-default" ng-click="addToShoppingCart(product)">+</button>
+            </div>
+          </div>
+          <div class="col-xs-8 product-info">
+            <div><strong>Name:</strong> {{product.name}}<button type="button" class="close" ng-click="deleteProduct(product)" ng-if="isAdmin()">&times;</button></div>
+            <div><strong>Info:</strong> {{product.info}}</div>
+            <div><strong>Price:</strong> ${{product.price}}</div>
+          </div>          
+          <a class="btn btn-default col-xs-12" ng-click="setProduct(product)" href="/productInfo">Comments</a>
         </div>
-        <a class="btn btn-primary pull-right" ng-click="setProductId(product._id)" href="/productInfo">Comments</a>
       </div>
+    </div>
+    <div class="col-md-2">
+      <shopping-cart></shopping-cart>
     </div>
   </div>
 
-  <form class="product-form">
+  <form class="product-form" ng-if="isAdmin()">
     <label>Add new Product</label>
     <p class="input-group product-form">
       <input type="text" class="form-control" placeholder="Product name" ng-model="newProduct.name">
@@ -33,11 +36,4 @@
     </p>
   </form>
 </div>
-
-<footer class="footer">
-  <div class="container">
-      <p>Angular Fullstack v2.0.13 |
-        <a href="https://twitter.com/tyhenkel">@tyhenkel</a> |
-         <a href="https://github.com/DaftMonk/generator-angular-fullstack/issues?state=open">Issues</a></p>
-  </div>
-</footer>
+<website-footer></website-footer>

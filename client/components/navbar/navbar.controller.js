@@ -5,6 +5,9 @@ angular.module('portlandStoreApp')
     $scope.menu = [{
       'title': 'Home',
       'link': '/'
+    }, {
+      'title': 'Check Out',
+      'link': '/checkOut'
     }];
 
     $scope.isCollapsed = true;

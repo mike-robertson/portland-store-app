@@ -29,6 +29,19 @@ exports.show = function(req, res) {
   });
 };
 
+// Get a list of products
+exports.getList = function(req, res) {
+  var products = req.params.ids.split(",");
+    Product.find({
+      '_id': { $in: products
+      }
+    }, function (err, products) {
+      if(err) { return handleError(res, err); }
+      if(!products) { return res.send(404); }
+      return res.json(products);
+    });
+};
+
 // Creates a new product in the DB.
 exports.create = function(req, res) {
   Product.create(req.body, function(err, product) {

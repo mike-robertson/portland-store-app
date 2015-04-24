@@ -6,6 +6,55 @@ input {
     margin-bottom: 10px !important;
 }
 
+.ui-scrollfix { 
+    position: fixed; 
+}
+
+.small-margin-y {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.product-info {
+    word-wrap: break-word;
+}
+
+.product-pane {
+    margin-bottom: 20px;
+}
+
+@media (min-width: 1025px) {
+    .masonry-brick {
+        padding: 5px 15px;
+        width: 45%;
+        margin: 0;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+    .masonry-brick {
+        padding: 5px 15px;
+        //width: 50%;
+        margin: 0;
+    }
+}
+
+@media (max-width: 767px) {
+    .masonry-brick {
+        padding: 5px 15px;
+        width: 100%;
+        margin: 0;
+    }
+}
+
+.masonry-brick {
+    margin-bottom: 20px;
+}
+
+.no-padding {
+    padding: 0;
+}
+
 #banner {
     border-bottom: none;
     margin-top: -20px;

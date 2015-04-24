@@ -19,7 +19,11 @@ $fa-font-path: "/bower_components/font-awesome/fonts";
 // injector
 @import 'account/login/login.scss';
 @import 'admin/admin.scss';
+@import 'checkOut/checkOut.scss';
 @import 'main/main.scss';
 @import 'productInfo/productInfo.scss';
+@import 'shoppingCart/shoppingCart.scss';
+@import 'websiteFooter/websiteFooter.scss';
+@import 'websiteHeader/websiteHeader.scss';
 @import 'modal/modal.scss';
 // endinjector

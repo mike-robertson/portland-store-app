@@ -1,13 +1,16 @@
 'use strict';
 
 angular.module('portlandStoreApp')
-  .controller('MainCtrl', function ($scope, $http, socket, productInfoService) {
+  .controller('MainCtrl', function ($scope, $http, socket, productInfoService, shoppingCartService, Auth) {
     $scope.products = [];
     $scope.newProduct = {
       name: '',
       info: '',
       price: ''
     };
+
+    $scope.isAdmin = Auth.isAdmin;
+    $scope.shoppingCart = shoppingCartService.getProducts();
 
     // Get the list of products from the backend, 
     // then sync using socket.io to update in real time whenever someone makes a change.
@@ -21,7 +24,7 @@ angular.module('portlandStoreApp')
         return;
       }
       $http.post('/api/products', $scope.newProduct);
-      $scope.newProduct = '';
+      $scope.newProduct = {};
     };
 
     $scope.deleteProduct = function(product) {
@@ -29,8 +32,24 @@ angular.module('portlandStoreApp')
     };
 
     // We set this so that we can use it in our product info page.
-    $scope.setProductId = function(productId) {
-      productInfoService.setProductId(productId);
+    $scope.setProduct = function(product) {
+      productInfoService.setProduct(product);
+    };
+
+    $scope.addToShoppingCart = function(product) {
+      shoppingCartService.addProduct(product);
+      $scope.shoppingCart = shoppingCartService.getProducts();
+    };
+
+    $scope.removeItemFromShoppingCart = function(product) {
+      shoppingCartService.removeProduct(product);
+      $scope.shoppingCart = shoppingCartService.getProducts();
+    };
+
+    $scope.getShoppingCartCount = function(product) {
+      return $scope.shoppingCart.reduce(function(count, p) {
+        return count + (p._id === product._id);
+      }, 0);
     };
 
     // Take care of our socket if the scope is destroyed.

@@ -4,17 +4,15 @@
 angular.module('portlandStoreApp')
   .service('productInfoService', function() {
 
-    var productId = '';
+    var product = {};
 
     return {
-      setProductId: function(id) {
-        productId = id;
-        console.log(productId);
+      setProduct: function(p) {
+        product = p;
       },
 
-      getProductId: function() {
-        console.log(productId);
-        return productId;
+      getProduct: function() {
+        return product;
       }
     };
 
