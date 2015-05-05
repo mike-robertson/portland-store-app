@@ -10,12 +10,15 @@ angular.module('portlandStoreApp', [
   'wu.masonry',
   'ui.scrollfix'
 ])
-  .config(function ($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider) {
+  .config(function ($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider, $windowProvider) {
     $urlRouterProvider
       .otherwise('/');
 
     $locationProvider.html5Mode(true);
     $httpProvider.interceptors.push('authInterceptor');
+
+    // This is the key we use for the strip.js tokenizer.
+    $windowProvider.$get().Stripe.setPublishableKey('pk_test_6pRNASCoBOKtIshFeQd4XMUh');
   })
 
   .factory('authInterceptor', function ($rootScope, $q, $cookieStore, $location) {

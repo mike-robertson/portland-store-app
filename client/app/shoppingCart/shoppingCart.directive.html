@@ -1,10 +1,18 @@
 <div stick-to-top>
-	<h1>Cart</h1>
-	<div ng-repeat="product in shoppingCartProducts">
-	  <div><strong>Name:</strong> {{product.name}}<button type="button" class="close" ng-click="removeFromShoppingCart(product)">&times;</button></div>
-	  <div><strong>Quantity:</strong> {{getShoppingCartCount(product)}}</div>
-	  <div><strong>Price:</strong> ${{product.price}}</div>
+	<div ng-if="isMobile()">
+		<button class="btn btn-success shopping-cart-button" ng-click="toggleMobileShoppingCart()"><span class="glyphicon glyphicon-shopping-cart" ></span></button>
 	</div>
-	<h2 ng-show="shoppingCartProducts.length !== 0">${{totalPrice}}</h2>
-	<a class="btn btn-success" ng-click="setProduct(product)" href="/checkOut" ng-show="shoppingCartProducts.length !== 0">Check out</a>
+	<div class="shopping-cart" ng-if="!isMobile() || expanded">
+		<h1>Cart</h1>
+		<div class="cart-items">
+			<div ng-repeat="product in shoppingCartProducts">
+			  <div><strong>Name:</strong> {{product.name}}<button type="button" class="close" ng-click="removeFromShoppingCart(product)">&times;</button></div>
+			  <div><strong>Quantity:</strong> {{getShoppingCartCount(product)}}</div>
+			  <div><strong>Price:</strong> ${{product.price}}</div>
+			  <span class="line" ng-if="$index < shoppingCartProducts.length - 1"></span>
+			</div>
+		</div>
+		<h2 ng-show="shoppingCartProducts.length !== 0">${{totalPrice}}</h2>
+		<a class="btn btn-success" ng-click="setProduct(product)" href="/checkOut" ng-show="shoppingCartProducts.length !== 0">Check out</a>
+	</div>
 </div>

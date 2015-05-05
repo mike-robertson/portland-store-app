@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('portlandStoreApp')
-  .controller('MainCtrl', function ($scope, $http, socket, productInfoService, shoppingCartService, Auth) {
+  .controller('MainCtrl', function ($scope, $http, socket, productInfoService, shoppingCartService, Auth, $window) {
     $scope.products = [];
     $scope.newProduct = {
       name: '',
@@ -11,6 +11,12 @@ angular.module('portlandStoreApp')
 
     $scope.isAdmin = Auth.isAdmin;
     $scope.shoppingCart = shoppingCartService.getProducts();
+
+    $scope.windowSize = $window.innerWidth;
+
+    $scope.isMobile = function() {
+      return $scope.windowSize <= 480 ? true : false;
+    };
 
     // Get the list of products from the backend, 
     // then sync using socket.io to update in real time whenever someone makes a change.
@@ -38,12 +44,10 @@ angular.module('portlandStoreApp')
 
     $scope.addToShoppingCart = function(product) {
       shoppingCartService.addProduct(product);
-      $scope.shoppingCart = shoppingCartService.getProducts();
     };
 
     $scope.removeItemFromShoppingCart = function(product) {
       shoppingCartService.removeProduct(product);
-      $scope.shoppingCart = shoppingCartService.getProducts();
     };
 
     $scope.getShoppingCartCount = function(product) {
@@ -51,6 +55,12 @@ angular.module('portlandStoreApp')
         return count + (p._id === product._id);
       }, 0);
     };
+    
+    //we want to listen to updates on the shopping cart from the directive and update the list if they delete an item
+    // Also, each time we add or subtract an item from the shopping cart, it will call the callback (since it receives a broadcast).
+    shoppingCartService.listenToUpdates(function() {
+      $scope.shoppingCart = shoppingCartService.getProducts();
+    });
 
     // Take care of our socket if the scope is destroyed.
     $scope.$on('$destroy', function () {

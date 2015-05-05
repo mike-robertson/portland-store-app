@@ -6,11 +6,11 @@ angular.module('portlandStoreApp')
       restrict: 'A',
       link: function (scope, element, attrs) {
       	var window = angular.element($window),
-      			parent = angular.element(element.parent()),
+      			parent = angular.element(element.parent().parent()),
       			currentOffsetTop = element.offset().top,
       			origCss = {
       				position: "static",
-      				// width: getParentWidth()
+      				width: getParentWidth()
       			};
 
       	handleSnapping();
@@ -19,7 +19,7 @@ angular.module('portlandStoreApp')
       	});
       	window.bind('resize', function() {
       		element.css({
-      			// width: getParentWidth()
+      			width: getParentWidth()
       		});
       	});
 
@@ -30,22 +30,23 @@ angular.module('portlandStoreApp')
       	}
 
       	function getParentWidth() { 
-      		return returnDigit(parent.css('width')) 
+      		return returnDigit(parent.css('width')) ;
 	      		- returnDigit(parent.css('padding-left')) 
 	      		- returnDigit(parent.css('padding-right')); 
       	}
 
       	function handleSnapping() {
       		if(window.scrollTop() > currentOffsetTop) {
-      			var headerOffsetTop = 0;
+      			var headerOffsetTop = 48;
+                        console.log(angular.element(element).css('width'));
       					element.css({
       						position: "fixed",
       						top: headerOffsetTop + "px",
-      						// width: getParentWidth()
+      						width: getParentWidth()
       					});
       		} else {
       			element.css(origCss);
-      			// element.css({width: getParentWidth()});
+      			element.css({width: getParentWidth()});
       		}
       	}
 

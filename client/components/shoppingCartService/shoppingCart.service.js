@@ -14,9 +14,13 @@ angular.module('portlandStoreApp')
       },
 
       removeProduct: function(p) {
-        var index = products.indexOf(p);
-        products.splice(index, 1);
-        $rootScope.$broadcast("shoppingCartUpdated");
+        var index = products.map(function(obj){
+          return obj._id;
+        }).indexOf(p._id);
+        if(index !== -1) {
+          products.splice(index, 1);
+          $rootScope.$broadcast("shoppingCartUpdated");
+        }
       },
 
       removeAllInstances: function(p) {
@@ -26,10 +30,21 @@ angular.module('portlandStoreApp')
         console.log('products');
         console.log(products);
         $rootScope.$broadcast("shoppingCartUpdated");
+        console.log("shoppingCartUpdated");
+      },
+
+      removeAllProducts: function() {
+        products = [];
+        $rootScope.$broadcast("shoppingCartUpdated");
+        console.log("shoppingCartUpdated");
       },
 
       getProducts: function() {
         return products;
+      },
+
+      getCartSize: function() {
+        return products.length;
       },
 
       getUniqueProducts: function() {

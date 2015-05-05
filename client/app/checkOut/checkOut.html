@@ -1,10 +1,13 @@
 <website-header></website-header>
 
 <div class="container">
+  <div class="col-xs-4 shopping-cart-mobile-widget" ng-if="isMobile()">
+    <shopping-cart></shopping-cart>
+  </div>
 	<div class="col-md-10">
-		Information about paying would go here.
+		<credit-card-payment></credit-card-payment>
 	</div>
-  <div class="col-md-2">
+  <div class="col-sm-2" ng-if="!isMobile()">
     <shopping-cart>
   </div>
 </div>

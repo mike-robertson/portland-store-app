@@ -1,10 +1,20 @@
 'use strict';
 
 angular.module('portlandStoreApp')
-  .controller('ShoppingCartCtrl', function ($scope, $http, socket, shoppingCartService) {
+  .controller('ShoppingCartCtrl', function ($scope, $http, socket, shoppingCartService, $window) {
     $scope.shoppingCartProducts = [];
     $scope.totalPrice = 0;
+    $scope.windowSize = $window.innerWidth;
+    $scope.expanded = false;
+
+    $scope.isMobile = function() {
+      return $scope.windowSize <= 480 ? true : false;
+    };
     
+    $scope.toggleMobileShoppingCart = function() {
+      $scope.expanded = !$scope.expanded;
+    };
+
     $scope.removeFromShoppingCart = function(product) {
       shoppingCartService.removeAllInstances(product);
       //$http.get('/api/products/ids/' + shoppingCartService.getProducts().map(function(e){return e._id}).join(",")).success(function(products) {
