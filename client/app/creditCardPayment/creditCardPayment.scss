@@ -11,3 +11,7 @@
 .form-container {
 	margin-top: 20px;
 }
+
+#creditCardForm .ng-dirty.ng-invalid {
+	color: #ff0000;
+}

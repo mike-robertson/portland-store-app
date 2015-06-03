@@ -6,6 +6,8 @@ angular.module('portlandStoreApp')
     $scope.paymentErrors = '';
     $scope.transactionSuccessful = false;
 
+    $scope.cardRegex = /^(?:3[47]\d|(?:4\d|5[1-5]|65)\d{2}|6011)\d{12}$/;
+
     $scope.cartSize = shoppingCartService.getCartSize();
 
     var transaction = {

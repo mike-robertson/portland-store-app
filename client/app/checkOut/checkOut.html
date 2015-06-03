@@ -1,13 +1,18 @@
 <website-header></website-header>
 
 <div class="container">
-  <div class="col-xs-4 shopping-cart-mobile-widget" ng-if="isMobile()">
-    <shopping-cart></shopping-cart>
+  <div class="col-sm-9">
+    <h2 ng-show="showShipping && showCreditCard">Review your order</h2>
+  	<div ng-show="showShipping">
+	  	<h2>Shipping Details</h2>
+	  	<shipping-form></shipping-form>
+	  </div>
+  	<div ng-show="showCreditCard" class="col-md-offset-6">
+	  	<h2>Credit Card Info</h2>
+	  	<credit-card-payment></credit-card-payment>
+	  </div>
   </div>
-	<div class="col-md-10">
-		<credit-card-payment></credit-card-payment>
-	</div>
-  <div class="col-sm-2" ng-if="!isMobile()">
+  <div class="col-sm-3">
     <shopping-cart>
   </div>
 </div>

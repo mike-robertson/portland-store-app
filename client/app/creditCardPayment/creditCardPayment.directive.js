@@ -5,7 +5,6 @@ angular.module('portlandStoreApp')
     return {
       templateUrl: 'app/creditCardPayment/creditCardPayment.html',
       restrict: 'EA',
-      controller: 'CreditCardPaymentCtrl',
-      scope: {}
+      controller: 'CreditCardPaymentCtrl'
     };
   });

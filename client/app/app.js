@@ -8,7 +8,8 @@ angular.module('portlandStoreApp', [
   'ui.router',
   'ui.bootstrap',
   'wu.masonry',
-  'ui.scrollfix'
+  'ui.scrollfix',
+  'ui.mask'
 ])
   .config(function ($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider, $windowProvider) {
     $urlRouterProvider
